@@ -1,0 +1,124 @@
+[
+    {
+        "marca" : "Apple",
+        "modelo": "iPhone 13",
+        "descripcion" : "128GB, Pantalla OLED Super Retina, CHIP A15",
+        "foto" : "iphone13.png",
+        "unidades" : 40,
+        "precio" : "759",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "Apple",
+        "modelo" : "iPhone 14",
+        "descripcion" : "256GB, Pantalla OLED Super Retina, CHIP A16",
+        "foto" : "iphone14.png",
+        "unidades" : 25,
+        "precio" : "1105",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "Samsung",
+        "modelo" : "Galaxy S23",
+        "descripcion" : "512GB, Pantalla QHD+, OctaCore",
+        "foto" : "samsungs23.png",
+        "unidades" : 35,
+        "precio" : "1640",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "Samsung",
+        "modelo" : "Galaxy A53",
+        "descripcion" : "128GB, Pantalla FHD+, Exynos 1280",
+        "foto" : "samsunga53.webp",
+        "unidades" : 10,
+        "precio" : "299",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "Motorola",
+        "modelo" : "Moto G41",
+        "descripcion" : "64GB, Pantalla SUPERFHD, 6GB RAM, MediaTek Helio G85",
+        "foto" : "motorolag41.png",
+        "unidades" : 12,
+        "precio" : "160",
+        "moneda" : "€",
+        "promociones" : 20
+    },
+    {
+        "marca" : "Motorola",
+        "modelo" : "Moto G82",
+        "descripcion" : "128GB, Pantalla FULL HD+, 6GB RAM, Qualcomm Snapdragon 695",
+        "foto" : "motorolag82.png",
+        "unidades" : 11,
+        "precio" : "220",
+        "moneda" : "€",
+        "promociones" : 10
+    },
+    {
+        "marca" : "Xiaomi",
+        "modelo" : "Xiaomi 11S Lite",
+        "descripcion" : "128GB, Pantalla FULL HD+, 6GB RAM, Helio G96",
+        "foto" : "xiaomi11s.webp",
+        "unidades" : 9,
+        "precio" : "229",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "Xiaomi",
+        "modelo" : "Xiaomi 11 PRO",
+        "descripcion" : "512GB, Pantalla OLED FULL HD+, 8GB RAM, Qualcomm Snapdragon 959",
+        "foto" : "xiaomi11s.webp",
+        "unidades" : 9,
+        "precio" : "229",
+        "moneda" : "€",
+        "promociones" : 0
+    },
+    {
+        "marca" : "OPPO",
+        "modelo" : "OPPO A96",
+        "descripcion" : "128GB, Pantalla FULL HD+, 8GB RAM, Qualcomm Snapdragon 680",
+        "foto" : "oppoa96.webp",
+        "unidades" : 15,
+        "precio" : "209",
+        "moneda" : "€",
+        "promociones" : 15
+    },
+    {
+        "marca" : "OPPO",
+        "modelo" : "OPPO Renno 8",
+        "descripcion" : "128GB, Pantalla FHD, 4GB RAM, MediaTek Helio G85",
+        "foto" : "opporeno8.webp",
+        "unidades" : 4,
+        "precio" : "180",
+        "moneda" : "€",
+        "promociones" : 15
+    },
+
+
+    {
+        "marca" : "POCCO",
+        "modelo" : "Pocophone X5 PRO",
+        "descripcion" : "256GB, Pantalla FHD+, 8GB RAM, Qualcomm Snapdragon 778G",
+        "foto" : "pocophonex5.png",
+        "unidades" : 9,
+        "precio" : "399",
+        "moneda" : "€",
+        "promociones" : 15
+    },
+    {
+        "marca" : "POCCO",
+        "modelo" : "Pocophone C40",
+        "descripcion" : "64GB, HD+, 4GB RAM, JLQ JR510 2.0GHz",
+        "foto" : "poccoc40.png",
+        "unidades" : 4,
+        "precio" : "180",
+        "moneda" : "€",
+        "promociones" : 15
+    }
+]
