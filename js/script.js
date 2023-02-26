@@ -103,9 +103,9 @@ function agregacarrito(e) {
             }
 
             //SPAN PRODUCTOS DEL CARRITO
-            if (cuentaproductos > 0) {
-                document.querySelector(".contador_productos").innerHTML = `<span>${cuentaproductos}</span>`
-            }
+            
+            document.querySelector(".contador_productos").innerHTML = `<span>${cuentaproductos}</span>`
+          
 
             //FUNCION QUE PINTA PRODUCTOS EN EL CARRITO
             pintaCarrito(mapCarrito);
@@ -119,8 +119,11 @@ function agregacarrito(e) {
 
 }
 
+
+
 function pintaCarrito(mapCarrito) {
     divCarrito.innerHTML = "";
+
     for (let [modelo, producto] of mapCarrito) {
         let contenido = document.createElement("div");
         contenido.classList.add("contenido");
@@ -147,51 +150,80 @@ function pintaCarrito(mapCarrito) {
 
         let carritoCantidades = contenido.querySelector(".carrito_unidades");
         carritoCantidades.addEventListener("click", (e) => {
-            procesaUnidadesCarrito(e, modelo,contenido);
+            procesaUnidadesCarrito(e, modelo,contenido, mapCarrito);
         });
     }
 }
 
-function procesaUnidadesCarrito(e, modelo,contenido) {
+function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
 
+    let spanCarrito = document.querySelector("header .contador_productos span");
     let unidadesNumero = contenido.querySelector(".unidades_numero");
     let precioSumamoviles = contenido.querySelector(".precio_sumamoviles");
+
     let producto = mapCarrito.get(modelo);
+    
+    let carrito = document.querySelector(".divcarrito");
+
 
    let productoCarrito = document.querySelector(`[data-modelo="${producto.modelo.replace(/ /g, '_')}"]`);
 
-
     let divproducto = document.querySelector(`#${producto.modelo.replace(/ /g, '_')}`);
+    
     const stock = divproducto.querySelector('.unidades_producto');
 
-    console.log(stock);
+  
 
-    if (e.target.classList == 'menos' && unidadesNumero.textContent != 0) {
+    if (e.target.classList == 'menos') {
         producto.cantidad--;
+        cuentaproductos--;
+        spanCarrito.innerHTML = cuentaproductos;
         producto.precio = producto.precio - producto.preciounidad;
-        stock.innerHTML = parseInt(stock.textContent)+1;   
-    }
+        stock.innerHTML = parseInt(stock.textContent)+1; 
+        unidadesNumero.innerHTML = producto.cantidad;
 
-    //MIRAR CONTADOR PARA QUE NO DEJE COMPRAR MAS MOVILES DE LOS QUE HAY EN STOCK
-    if (e.target.classList == 'mas' && unidadesNumero.textContent != stock) {
-        producto.cantidad++;
-        producto.precio = producto.precio + producto.preciounidad;
         
-        if(parseInt(stock.innerHTML) > 1){
-            stock.innerHTML = parseInt(stock.textContent)-1;
-        }else{
-            stock.innerHTML = 0;
-            productoAgotado(divproducto.querySelector(".imagen_producto"), divproducto.querySelector(".botoncarrito"));
-            
+        if(producto.cantidad == 0){
+            mapCarrito.delete(modelo);
+            productoCarrito.remove();
+        }
+
+        if(mapCarrito.size == 0){
+            spanCarrito.parentNode.innerHTML = "";
+            carrito.classList.remove("mostrar");
+        }
+
+        if(stock.innerHTML == 1){
+            divproducto.querySelector('button').disabled = false;
+            divproducto.querySelector(".imagen_agotado").remove();
         }
     }
 
-    unidadesNumero.innerHTML = producto.cantidad;
+
+    //MIRAR CONTADOR PARA QUE NO DEJE COMPRAR MAS MOVILES DE LOS QUE HAY EN STOCK
+    if (e.target.classList == 'mas') {
+        if(parseInt(stock.innerHTML) != 0){
+            stock.innerHTML = parseInt(stock.textContent)-1;
+            producto.cantidad++;
+            cuentaproductos++;
+            producto.precio = producto.precio + producto.preciounidad;
+            spanCarrito.innerHTML = parseInt(spanCarrito.textContent)+1;
+            unidadesNumero.innerHTML = producto.cantidad;
+
+        }
+ 
+       if(parseInt(stock.innerHTML) < 1){
+            productoAgotado(divproducto.querySelector(".imagen_producto"), divproducto.querySelector(".botoncarrito"));
+            this.disabled = true; 
+        }
+    }
+
     precioSumamoviles.innerHTML = `Precio: ${producto.precio}`;
 }
 
 function productoAgotado(imagen, boton) {
     let imagenagotado = document.createElement("img");
+    imagenagotado.classList.add("imagen_agotado");
     imagenagotado.src = "./images/agotado.png";
     imagenagotado.width = "400";
     imagenagotado.style.position = "absolute";
