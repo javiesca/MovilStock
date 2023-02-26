@@ -4,9 +4,8 @@
         "modelo": "iPhone 13",
         "descripcion" : "128GB, Pantalla OLED Super Retina, CHIP A15",
         "foto" : "iphone13.png",
-        "unidades" : 40,
+        "unidades" : 9,
         "precio" : "759",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -14,9 +13,8 @@
         "modelo" : "iPhone 14",
         "descripcion" : "256GB, Pantalla OLED Super Retina, CHIP A16",
         "foto" : "iphone14.png",
-        "unidades" : 25,
+        "unidades" : 11,
         "precio" : "1105",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -24,9 +22,8 @@
         "modelo" : "Galaxy S23",
         "descripcion" : "512GB, Pantalla QHD+, OctaCore",
         "foto" : "samsungs23.png",
-        "unidades" : 35,
+        "unidades" : 15,
         "precio" : "1640",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -34,9 +31,8 @@
         "modelo" : "Galaxy A53",
         "descripcion" : "128GB, Pantalla FHD+, Exynos 1280",
         "foto" : "samsunga53.webp",
-        "unidades" : 10,
+        "unidades" : 8,
         "precio" : "299",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -44,9 +40,8 @@
         "modelo" : "Moto G41",
         "descripcion" : "64GB, Pantalla SUPERFHD, 6GB RAM, MediaTek Helio G85",
         "foto" : "motorolag41.png",
-        "unidades" : 12,
+        "unidades" : 6,
         "precio" : "160",
-        "moneda" : "€",
         "promociones" : 20
     },
     {
@@ -54,9 +49,8 @@
         "modelo" : "Moto G82",
         "descripcion" : "128GB, Pantalla FULL HD+, 6GB RAM, Qualcomm Snapdragon 695",
         "foto" : "motorolag82.png",
-        "unidades" : 11,
+        "unidades" : 4,
         "precio" : "220",
-        "moneda" : "€",
         "promociones" : 10
     },
     {
@@ -66,7 +60,6 @@
         "foto" : "xiaomi11s.webp",
         "unidades" : 9,
         "precio" : "229",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -74,9 +67,8 @@
         "modelo" : "Xiaomi 11 PRO",
         "descripcion" : "512GB, Pantalla OLED FULL HD+, 8GB RAM, Qualcomm Snapdragon 959",
         "foto" : "xiaomi11s.webp",
-        "unidades" : 9,
+        "unidades" : 11,
         "precio" : "229",
-        "moneda" : "€",
         "promociones" : 0
     },
     {
@@ -86,7 +78,6 @@
         "foto" : "oppoa96.webp",
         "unidades" : 15,
         "precio" : "209",
-        "moneda" : "€",
         "promociones" : 15
     },
     {
@@ -96,7 +87,6 @@
         "foto" : "opporeno8.webp",
         "unidades" : 4,
         "precio" : "180",
-        "moneda" : "€",
         "promociones" : 15
     },
 
@@ -108,7 +98,6 @@
         "foto" : "pocophonex5.png",
         "unidades" : 9,
         "precio" : "399",
-        "moneda" : "€",
         "promociones" : 15
     },
     {
@@ -118,7 +107,6 @@
         "foto" : "poccoc40.png",
         "unidades" : 4,
         "precio" : "180",
-        "moneda" : "€",
-        "promociones" : 15
+        "promociones" : 20
     }
 ]

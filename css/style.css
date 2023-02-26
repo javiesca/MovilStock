@@ -49,7 +49,10 @@ h1 span{
     width: 30px;
     background-color: white;
     border-radius: 50%;
+    font-weight: bolder;
 }
+
+
 
                                     /*CONTENIDO*/
 .productos{
@@ -88,21 +91,49 @@ h1 span{
 .producto .texto{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     width: 70%;
 }
 
-.producto .texto p:nth-child(1){
+.producto .modelo{
+    font-size: 20px;
     font-weight: bolder;
-    font-size: 1.2em;
 }
 
-.producto .precio{
+.producto .precio_producto{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
+    align-items: center
+}
+
+.producto .precio_sinoferta{
+    text-decoration: line-through;
+    color: var(--color-rojo);
+}
+
+
+.producto .precio_final{
+    font-weight: bolder;
+    font-size: 1.3em;
+}
+
+
+
+.producto button{
+    background-color: var(--color-rojo);
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+}
+
+.producto button:hover{
+    transform: scale(1.1);
+}
+
+.producto button:disabled{
+    transform: scale(1);
+    background-color: grey;
+    cursor: unset;
 }
 
 .producto .moneda{
@@ -135,6 +166,12 @@ h1 span{
     color: white;
 }
 
+.precio_producto{
+    display: flex;
+    justify-content: center;
+    gap:20px;
+}
+
 
                                 /*CARRITO*/
 
@@ -147,9 +184,6 @@ h1 span{
     background-color: var(--color-rojo);
     color: white;
 }
-
-
-
 
 .divcarrito{
     display: flex;
@@ -165,6 +199,7 @@ h1 span{
     z-index:1;
     align-items: center;
     padding-bottom: 20px;
+    border-radius: 0px 0px 20px 20px;
 }
 
 .divcarrito .carrito_productos{
@@ -173,11 +208,10 @@ h1 span{
 
 .divcarrito .contenido{
     display: flex;
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
     justify-content: space-around;
-    gap: 30px;
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
 }
@@ -185,16 +219,16 @@ h1 span{
 .texto_carrito{
     display: flex;
     flex-direction: column;
-    gap: 5px;
     align-items: center;
+    justify-content: space-around;
 }
 
 .carrito_unidades{
     width: 80px;
-    margin-top: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    justify-content: center;
     height: 20px;
     border: 1px solid rgb(169, 169, 169);
 }
@@ -210,10 +244,42 @@ h1 span{
     width: 40%;
 }
 
+.carrito_modelo{
+    font-weight: bolder;
+    border-bottom: 2px solid red;
+}
+
+.carrito_preciosuma{
+    font-weight: bolder;
+}
+
+.carrito_preciounidad{
+    font-size: 0.8em;
+}
+
+button{
+    cursor: pointer;
+}
+
+.texto_factura_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    border-top: 4px solid white;
+    background-color:white;
+    height:100px;
+    border-radius: 20px;
+}
+
+
 .mostrar{
     top:100px;
 }
 
+
+        /*MEDIA QUERIES*/
 
 @media(max-width:1050px){
     .productos{
@@ -223,7 +289,6 @@ h1 span{
     header h1{
         font-size: 45px;
     }
-
  
 }
 
