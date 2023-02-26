@@ -77,7 +77,7 @@ function agregacarrito(e) {
 
         let unidades = this.querySelector(".unidades_producto");
 
-        if (unidades.textContent > 1) {
+        if (unidades.textContent >= 1) {
             unidades.textContent = unidades.textContent - 1;
             let imgsrc = this.querySelector("img").getAttribute("src");
             let marcavar = this.querySelector(".marca").textContent;
@@ -111,10 +111,14 @@ function agregacarrito(e) {
             pintaCarrito(mapCarrito);
 
             //SI NO HAY MAS PRODUCTOS, FUNCION QUE PINTA CARTEL SOLD-OUT Y RESTA UNIDADES
-        } else {
+        } 
+
+        if(unidades.textContent == 0){
             unidades.textContent = 0;
             productoAgotado(this.querySelector(".imagen_producto"), this.querySelector(".botoncarrito"))
         }
+         
+        
     }
 
 }
@@ -175,15 +179,16 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
   
 
     if (e.target.classList == 'menos') {
+
+        stock.innerHTML = parseInt(stock.textContent)+1; 
         producto.cantidad--;
         cuentaproductos--;
         spanCarrito.innerHTML = cuentaproductos;
         producto.precio = producto.precio - producto.preciounidad;
-        stock.innerHTML = parseInt(stock.textContent)+1; 
         unidadesNumero.innerHTML = producto.cantidad;
+        productoCarrito.querySelector(".mas").disabled = false;
 
-        
-        if(producto.cantidad == 0){
+        if(producto.cantidad < 1){
             mapCarrito.delete(modelo);
             productoCarrito.remove();
         }
@@ -191,30 +196,34 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
         if(mapCarrito.size == 0){
             spanCarrito.parentNode.innerHTML = "";
             carrito.classList.remove("mostrar");
-        }
+        } 
 
-        if(stock.innerHTML == 1){
+        if(stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true){
             divproducto.querySelector('button').disabled = false;
             divproducto.querySelector(".imagen_agotado").remove();
         }
     }
 
+  
+
 
     //MIRAR CONTADOR PARA QUE NO DEJE COMPRAR MAS MOVILES DE LOS QUE HAY EN STOCK
     if (e.target.classList == 'mas') {
-        if(parseInt(stock.innerHTML) != 0){
+
+        if(parseInt(stock.innerHTML) > 0){
+            producto.precio = producto.precio + producto.preciounidad;
             stock.innerHTML = parseInt(stock.textContent)-1;
             producto.cantidad++;
             cuentaproductos++;
-            producto.precio = producto.precio + producto.preciounidad;
             spanCarrito.innerHTML = parseInt(spanCarrito.textContent)+1;
             unidadesNumero.innerHTML = producto.cantidad;
 
         }
  
        if(parseInt(stock.innerHTML) < 1){
-            productoAgotado(divproducto.querySelector(".imagen_producto"), divproducto.querySelector(".botoncarrito"));
-            this.disabled = true; 
+            productoCarrito.querySelector(".mas").disabled = true;
+            productoAgotado(divproducto.querySelector(".imagen_producto"),divproducto.querySelector(".botoncarrito")); 
+
         }
     }
 

@@ -214,3 +214,47 @@ h1 span{
     top:100px;
 }
 
+
+@media(max-width:1050px){
+    .productos{
+        grid-template-columns: repeat(2, 1fr);  
+    }
+
+    header h1{
+        font-size: 45px;
+    }
+
+ 
+}
+
+@media(max-width:750px){
+    header{
+        padding:40px;
+    }
+
+    header .contador_productos{
+        width: 10px;
+        height: 10px;
+        font-size: 15px;
+    }
+
+    .productos{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    header #carrito{
+        font-size: 30px;
+    }
+
+    .divcarrito{
+        width: 375px;
+        left: calc(100% - 375px);
+    }
+
+    .divcarrito img{
+        width: 150px;
+    }
+}
+    
+
+
