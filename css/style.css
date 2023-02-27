@@ -53,7 +53,6 @@ h1 span{
 }
 
 
-
                                     /*CONTENIDO*/
 .productos{
     margin:40px 40px; 
@@ -63,9 +62,10 @@ h1 span{
 }
 
 .productos h2{
-    width: 60%;
+    width: 140px;
     font-size: 30px;
-    border-bottom: 4px solid var(--color-rojo);;
+    border-bottom: 4px solid var(--color-rojo);
+    margin-right: 80px;
 }
 
 .producto{
@@ -175,13 +175,27 @@ h1 span{
 
                                 /*CARRITO*/
 
+
+.carrito_pdf{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: white;
+    justify-content: space-around;
+    border-bottom: 4px solid white;
+}
+
+.carrito_pdf i{
+    font-size: 30px;
+}
+
+.carrito_pdf i{
+    cursor: pointer;
+}
+
 .divcarrito h2{
     font-size: 30px;
-    margin-top:10px;
     line-height: 60px;
-    border-bottom: 4px solid white;
-    width: 100%;
-    background-color: var(--color-rojo);
     color: white;
 }
 
@@ -277,6 +291,8 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-end;
+    padding-right: 20px;
     gap: 10px;
     margin-top: 20px;
     border-top: 4px solid white;

@@ -5,6 +5,23 @@ body{
     width: 90%;
     margin: 0 auto;
     overflow: hidden;
+    position: relative;
+}
+
+
+.triangulo{
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 500px;
+    height: 300px;
+    background-color:var(--color-rojo);
+    font-size: 30px;
+    color: white;
+    rotate: 45deg;
+    left:calc(100% - 170px);
+    top:-200px;
 }
 
 header{
@@ -41,20 +58,6 @@ span{
     color: var(--color-rojo);
 }
 
-.triangulo{
-    position: absolute;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 500px;
-    height: 300px;
-    background-color:var(--color-rojo);
-    font-size: 30px;
-    color: white;
-    rotate: 45deg;
-    left:calc(100% - 230px);
-    top:calc(100vh - 870px);
-}
 
 .triangulo h2{
     margin-bottom: 20px;

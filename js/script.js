@@ -183,7 +183,7 @@ function pintaCarrito(mapCarrito) {
         });
     }
 
-    
+
 
     pintaFactura(mapCarrito);
 }
@@ -226,8 +226,9 @@ function pintaFactura(mapCarrito) {
     let precioConIva = document.createElement("span");
     precioConIva.classList.add("span_coniva");
     precioConIva.innerHTML = `
-    Precio Total ${precio} €
+    Precio Total: ${precio} €
     `
+    precioConIva.style.fontWeight = "bolder";
     divTextoFactura.appendChild(precioConIva);
     divFactura.appendChild(divTextoFactura);
     divCarrito.appendChild(divFactura);
@@ -245,23 +246,23 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
     let divproducto = document.querySelector(`#${producto.modelo.replace(/ /g, '_')}`);
     const stock = divproducto.querySelector('.unidades_producto');
 
-    if(e.target.tagName == "I"){
+    if (e.target.tagName == "I") {
         stock.innerHTML = parseInt(stock.textContent) + parseInt(producto.cantidad);
 
         cuentaproductos = cuentaproductos - producto.cantidad;
         spanCarrito.innerHTML = cuentaproductos;
 
-        if(spanCarrito.textContent == 0){
+        if (spanCarrito.textContent == 0) {
             spanCarrito.parentNode.innerHTML = "";
         }
-        
+
         mapCarrito.delete(modelo);
         productoCarrito.remove();
 
-        if(mapCarrito.size == 0){
+        if (mapCarrito.size == 0) {
             carrito.classList.remove("mostrar");
         }
-        
+
         if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
             divproducto.querySelector('button').disabled = false;
             divproducto.querySelector(".imagen_agotado").remove();
@@ -325,6 +326,27 @@ function productoAgotado(imagen, boton) {
     imagenagotado.style.position = "absolute";
     imagen.appendChild(imagenagotado);
     boton.disabled = true;
+}
+
+
+document.querySelector(".carrito_pdf i").addEventListener("click", function () {
+    generaPdf();
+})
+
+function generaPdf() {
+  
+    let usuario = {
+        nombre:"Pedro Suarez López",
+        direccion:"C/Progreso Nº5 4ºDcha",
+        correo:"pedrosuarez@gmail.com",
+        telefono:"655323232"
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    window.open("../factura.html");
 }
 
 
