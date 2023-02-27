@@ -1,0 +1,126 @@
+@import url("/css/reset.css");
+@import url("/css/stylegeneral.css");
+
+body{
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+header{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 30px;
+}
+
+.datos{
+    display: flex;
+}
+
+.datos_persona{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.fechanumfactura{
+    display: flex;
+    flex-direction: column;
+}
+
+
+h1{
+    font-size: 40px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-family: 'Carter One', cursive;
+}
+
+span{
+    color: var(--color-rojo);
+}
+
+.triangulo{
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 500px;
+    height: 300px;
+    background-color:var(--color-rojo);
+    font-size: 30px;
+    color: white;
+    rotate: 45deg;
+    left:calc(100% - 230px);
+    top:calc(100vh - 870px);
+}
+
+.triangulo h2{
+    margin-bottom: 20px;
+}
+
+main{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+}
+
+table{
+    padding: 20px 20px;
+    border-collapse: collapse;
+    align-items: center;
+    border-bottom: 4px solid var(--color-rojo);
+}
+
+th{
+    background-color: var(--color-rojo);
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+td, th{
+    width: 35%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 30px;
+}
+
+.container_total_pedido{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+
+.detalle_iva{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30%;
+    padding-right: 20px;
+    gap:5px;
+}
+
+.total_pedido{
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 30%;
+    background-color: var(--color-rojo);
+    height: 30px;
+    color:white;
+
+}
+
+
+
+
+
+
+
+

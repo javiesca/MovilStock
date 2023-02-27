@@ -75,7 +75,7 @@ function pintaMoviles(datos) {
             precioSin.innerText = `${movil.precio}€`;
             divprecio.appendChild(precioSin);
 
-            let precioOferta = parseInt(movil.precio) - parseInt((movil.precio * 20) / 100)
+            let precioOferta = parseInt(movil.precio) - parseFloat((movil.precio * 20) / 100)
             precioCon.innerHTML = `${precioOferta}€`;
             divprecio.appendChild(precioCon);
         }
@@ -162,11 +162,14 @@ function pintaCarrito(mapCarrito) {
         <div class="texto_carrito">
             <p class="carrito_modelo">${modelo}</p>
             <p class="carrito_preciounidad">Unidad: ${producto.preciounidad}€</p>
-
-            <div class="carrito_unidades">
-                <button class="menos">-</button>
-                <span class="unidades_numero">${producto.cantidad}</span>
-                <button class="mas">+</button>
+            <div class="control_carrito_unidades">
+                <div class="carrito_unidades">
+                    <button class="menos">-</button>
+                    <span class="unidades_numero">${producto.cantidad}</span>
+                    <button class="mas">+</button>
+                    
+                </div>
+                <i id="borra_producto_carrito" class="fa-solid fa-trash"></i>
             </div>
             <p class="carrito_preciosuma">Precio: ${producto.precio}€</p>
             
@@ -174,11 +177,13 @@ function pintaCarrito(mapCarrito) {
        `
         divCarrito.appendChild(contenido);
 
-        let carritoCantidades = contenido.querySelector(".carrito_unidades");
+        let carritoCantidades = contenido.querySelector(".control_carrito_unidades");
         carritoCantidades.addEventListener("click", (e) => {
             procesaUnidadesCarrito(e, modelo, contenido, mapCarrito);
         });
     }
+
+    
 
     pintaFactura(mapCarrito);
 }
@@ -189,20 +194,20 @@ divFactura.classList.add("total_carrito_container");
 let divTextoFactura = document.createElement("div");
 divTextoFactura.classList.add("texto_factura_container");
 
-function pintaFactura(mapCarrito){
+function pintaFactura(mapCarrito) {
 
     divTextoFactura.innerHTML = "";
-    
+
     let precio = 0;
 
-    for(let moviles of mapCarrito.values()){
-        precio += moviles.precio
+    for (let moviles of mapCarrito.values()) {
+        precio += parseFloat(moviles.precio)
     }
 
-    let calculoSinIVA = (precio / (1 + 0.21)).toFixed(2);
-    let calculoIVA = (precio * 0.21).toFixed(2);
+    let calculoSinIVA = parseFloat(precio / (1.21)).toFixed(2);
+    let calculoIVA = parseFloat(precio - calculoSinIVA).toFixed(2);
 
-    
+
     let precioSinIva = document.createElement("span");
     precioSinIva.classList.add("span_siniva");
     precioSinIva.innerHTML = `
@@ -212,7 +217,7 @@ function pintaFactura(mapCarrito){
 
     let IVA = document.createElement("span");
     IVA.classList.add("span_IVA");
-    
+
     IVA.innerHTML = `
     IVA: ${calculoIVA} €
     `
@@ -239,6 +244,31 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
     let productoCarrito = document.querySelector(`[data-modelo="${producto.modelo.replace(/ /g, '_')}"]`);
     let divproducto = document.querySelector(`#${producto.modelo.replace(/ /g, '_')}`);
     const stock = divproducto.querySelector('.unidades_producto');
+
+    if(e.target.tagName == "I"){
+        stock.innerHTML = parseInt(stock.textContent) + parseInt(producto.cantidad);
+
+        cuentaproductos = cuentaproductos - producto.cantidad;
+        spanCarrito.innerHTML = cuentaproductos;
+
+        if(spanCarrito.textContent == 0){
+            spanCarrito.parentNode.innerHTML = "";
+        }
+        
+        mapCarrito.delete(modelo);
+        productoCarrito.remove();
+
+        if(mapCarrito.size == 0){
+            carrito.classList.remove("mostrar");
+        }
+        
+        if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
+            divproducto.querySelector('button').disabled = false;
+            divproducto.querySelector(".imagen_agotado").remove();
+        }
+
+        pintaFactura(mapCarrito);
+    }
 
     if (e.target.classList == 'menos') {
         stock.innerHTML = parseInt(stock.textContent) + 1;

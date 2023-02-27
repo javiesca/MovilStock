@@ -223,13 +223,24 @@ h1 span{
     justify-content: space-around;
 }
 
+.control_carrito_unidades{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    border: 1px solid #A9A9A9;
+}
+
+.control_carrito_unidades i{
+    cursor: pointer;
+    font-size: 20px;
+}
+
 .carrito_unidades{
-    width: 80px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     justify-content: center;
-    height: 20px;
     border: 1px solid rgb(169, 169, 169);
 }
 
@@ -241,7 +252,8 @@ h1 span{
     border: none;
     background-color:rgb(169, 169, 169);
     font-size: 15px;
-    width: 40%;
+    width: 40px;
+    height: 25px;
 }
 
 .carrito_modelo{
