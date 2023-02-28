@@ -2,19 +2,18 @@ window.onload = () => {
     recuperaDatos()
 }
 
+//          VARIABLES GLOBALES
+let cuentaproductos = 0;
+let mapCarrito = new Map();
+let divCarrito = document.querySelector(".carrito_productos");
+
+
 //RECUPERAMOS DE FORMA ASINCRONA LOS DATOS DEL JSON
 async function recuperaDatos() {
     let response = await fetch("./js/productos.json");
     let datos = await response.json();
     pintaMoviles(datos);
 }
-
-
-//          VARIABLES GLOBALES
-
-let cuentaproductos = 0;
-let mapCarrito = new Map();
-let divCarrito = document.querySelector(".carrito_productos");
 
 
 //FUNCIÓN QUE PINTA LOS PRODUCTOS
@@ -195,7 +194,6 @@ let divTextoFactura = document.createElement("div");
 divTextoFactura.classList.add("texto_factura_container");
 
 function pintaFactura(mapCarrito) {
-
     divTextoFactura.innerHTML = "";
 
     let precio = 0;
@@ -228,6 +226,7 @@ function pintaFactura(mapCarrito) {
     precioConIva.innerHTML = `
     Precio Total: ${precio} €
     `
+
     precioConIva.style.fontWeight = "bolder";
     divTextoFactura.appendChild(precioConIva);
     divFactura.appendChild(divTextoFactura);
@@ -263,12 +262,6 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
             carrito.classList.remove("mostrar");
         }
 
-        if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
-            divproducto.querySelector('button').disabled = false;
-            divproducto.querySelector(".imagen_agotado").remove();
-        }
-
-        pintaFactura(mapCarrito);
     }
 
     if (e.target.classList == 'menos') {
@@ -290,10 +283,6 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
             carrito.classList.remove("mostrar");
         }
 
-        if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
-            divproducto.querySelector('button').disabled = false;
-            divproducto.querySelector(".imagen_agotado").remove();
-        }
     }
 
     //MIRAR CONTADOR PARA QUE NO DEJE COMPRAR MAS MOVILES DE LOS QUE HAY EN STOCK
@@ -313,10 +302,18 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
             productoAgotado(divproducto.querySelector(".imagen_producto"), divproducto.querySelector(".botoncarrito"));
         }
     }
-    precioSumamoviles.innerHTML = `Precio: ${producto.precio}€`;
-    pintaFactura(mapCarrito);
 
+
+    if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
+        divproducto.querySelector('button').disabled = false;
+        divproducto.querySelector(".imagen_agotado").remove();
+    }
+
+    precioSumamoviles.innerHTML = `Precio: ${producto.precio}€`;
+    
+    pintaFactura(mapCarrito);
 }
+
 
 function productoAgotado(imagen, boton) {
     let imagenagotado = document.createElement("img");
@@ -331,10 +328,10 @@ function productoAgotado(imagen, boton) {
 
 document.querySelector(".carrito_pdf i").addEventListener("click", function () {
     generaPdf();
-})
+});
 
 function generaPdf() {
-  
+
     let usuario = {
         nombre:"Pedro Suarez López",
         direccion:"C/Progreso Nº5 4ºDcha",
@@ -343,9 +340,8 @@ function generaPdf() {
     }
 
     localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));
-
+    
     localStorage.setItem("usuario", JSON.stringify(usuario));
-
     window.open("../factura.html");
 }
 

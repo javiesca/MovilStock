@@ -2,13 +2,26 @@
 @import url("/css/stylegeneral.css");
 
 body{
-    width: 90%;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
     overflow: hidden;
-    position: relative;
 }
 
+.factura{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+    position: relative;
+    width: 80%;
+    height: 90%;
+    overflow: hidden;
+    background-color: rgb(246, 244, 244);
+}
 
+            /*TRIANGULO SUPERIOR DERECHO "FACTURA"*/
 .triangulo{
     position: absolute;
     display: flex;
@@ -20,48 +33,79 @@ body{
     font-size: 30px;
     color: white;
     rotate: 45deg;
-    left:calc(100% - 170px);
-    top:-200px;
+    right:-275px;
+    top:-175px;
 }
+
+.triangulo h2{
+    margin-bottom: 10px;
+}
+
+                    /*HEADER PRINCIPAL*/
 
 header{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     margin-top: 30px;
 }
 
-.datos{
-    display: flex;
+h1{
+    font-size: 40px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+    font-weight: bolder;
+    font-family: 'Carter One', cursive;
 }
 
+h1 span{
+    color: var(--color-rojo);
+}
+
+
+
+                    /*CONTENEDOR DATOS GENERALES*/
+
+.datos{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+        /*REVISAR*/            /*DATOS PERSONA*/
 .datos_persona{
+    width:50%;
+    font-size: 1.2em;
+}
+
+ .linea{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 5px;
+}
+
+.titulo_dato{
+    width: 130px;
+    text-align: right;
+    font-weight: bolder;
+}
+
+.dato{
+    width: 50%;
+}
+
+
+                /*DATOS FACTURA*/
+
+.fechanumfactura{
     display: flex;
     flex-direction: column;
     width: 50%;
 }
 
-.fechanumfactura{
-    display: flex;
-    flex-direction: column;
-}
 
 
-h1{
-    font-size: 40px;
-    margin-bottom: 20px;
-    font-weight: bolder;
-    font-family: 'Carter One', cursive;
-}
-
-span{
-    color: var(--color-rojo);
-}
-
-
-.triangulo h2{
-    margin-bottom: 20px;
-}
 
 main{
     margin-top: 70px;
@@ -91,6 +135,9 @@ td, th{
     padding: 15px 30px;
 }
 
+
+
+
 .container_total_pedido{
     display: flex;
     flex-direction: column;
@@ -101,11 +148,11 @@ td, th{
 
 .detalle_iva{
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 30%;
-    padding-right: 20px;
-    gap:5px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    padding-right: 30px;
+    gap:10px;
 }
 
 .total_pedido{
@@ -113,10 +160,13 @@ td, th{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 30%;
+    padding-right: 30px;
+    width: 50%;
     background-color: var(--color-rojo);
     height: 30px;
     color:white;
+    gap:20px;
+    font-size: 1.2em;
 
 }
 
