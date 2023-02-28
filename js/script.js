@@ -341,7 +341,7 @@ function generaPdf() {
     localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));
     
     localStorage.setItem("usuario", JSON.stringify(usuario));
-    window.open("/factura.html");
+    window.open("factura.html");
 }
 
 
