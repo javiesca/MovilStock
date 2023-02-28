@@ -202,9 +202,8 @@ function pintaFactura(mapCarrito) {
         precio += parseFloat(moviles.precio)
     }
 
-    let calculoSinIVA = parseFloat(precio / (1.21)).toFixed(2);
-    let calculoIVA = parseFloat(precio - calculoSinIVA).toFixed(2);
-
+    let calculoIVA = parseFloat(precio * 0.21).toFixed(2);
+    let calculoSinIVA = parseFloat(precio - calculoIVA).toFixed(2);
 
     let precioSinIva = document.createElement("span");
     precioSinIva.classList.add("span_siniva");
@@ -336,7 +335,7 @@ function generaPdf() {
         nombre:"Pedro Suarez López",
         direccion:"C/Progreso Nº5 4ºDcha",
         correo:"pedrosuarez@gmail.com",
-        telefono:"655323232"
+        telefono:"655 323 232"
     }
 
     localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));

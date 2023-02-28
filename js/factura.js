@@ -45,7 +45,7 @@ function pintaNumAndFecha(){
     let cadenaFecha = `${fecha.getDate()} / ${fecha.getMonth()+1} / ${fecha.getFullYear()}`;
     console.log(cadenaFecha);
     //ASIGNAMOS UN NUMERO ALEATORIO A LA FACTURA
-    let numeroAleatorio = Math.round(Math.random()*999999);
+    let numeroAleatorio = Math.round(Math.random()*99999999);
     console.log(numeroAleatorio);
 
     //PINTAMOS DATOS
@@ -55,9 +55,9 @@ function pintaNumAndFecha(){
         <span class=dato>${cadenaFecha}</span>
     </div>
     <div class="linea">
-    <span class=titulo_dato>Factura Num.: </span>
-    <span class=dato>MS-${numeroAleatorio}</span>
-</div>
+        <span class=titulo_dato>Factura Num.: </span>
+        <span class=dato>MS-${numeroAleatorio}</span>
+    </div>
 `
     
 }
@@ -97,19 +97,23 @@ function pintaDatosCarrito(mapCarrito){
 
 function pintaTotalFactura(precioTotalPedido){
 
-    let precioSinIVA = parseFloat(precioTotalPedido / (1.21)).toFixed(2);
-    let calculoIVA = parseFloat(precioTotalPedido - precioSinIVA).toFixed(2);
+    let calculoIVA = parseFloat(precioTotalPedido *0.21).toFixed(2);
+    let precioSinIVA = parseFloat(precioTotalPedido) - calculoIVA;
 
-    let detalleIVA = document.querySelector(".detalle_iva");
+    let detalleIVA = document.querySelector(".total_pedido_container");
     detalleIVA.innerHTML = `
-        <span class=titulo_detalleIVA>IVA 21%:</span>
-        <span class=valor_detalleIVA>${calculoIVA}€</span>
-    `
-
-    let detalleTotal = document.querySelector(".total_pedido");
-    detalleTotal.innerHTML = `
-        <span class=titulo_detalleTotal>Total: </span>
-        <span class=valor_detalleTotal>${precioTotalPedido}€</span>
-    `
+        <div class=linea>
+            <span class=titulo_dato>Precio Sin IVA:</span>
+            <span class=dato_numero>${precioSinIVA}€</span>
+        </div>
+        <div class=linea>
+            <span class=titulo_dato>IVA 21%:</span>
+            <span class=dato_numero>${calculoIVA}€</span>
+        </div>
+        <div class="linea total_pedido">
+            <span class=titulo_dato>Total: </span>
+            <span class=dato_numero>${precioTotalPedido}€</span>
+        </div>
+    `;
 
 }
