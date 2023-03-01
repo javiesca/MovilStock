@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dca65809ca.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/facturastyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./js/factura.js"></script>
     <title>Factura</title>
 </head>
 
 <body>
+    <div class="icono_genera">
+        <div class="contenido_genera">
+            <span class="genera">Descargar PDF</span>
+            <i class="fa-solid fa-file-arrow-down"></i>
+        </div>
+    </div>
+
     <div class="factura">
         <header>
             <h1>Movil<span class="resalta">Stock</span></h1>
@@ -44,9 +53,16 @@
             </div>
         </div>
 
-        <div class="separador"></div>
         <footer>
-
+            <div class="info_container">
+                <p class="condiciones">Condiciones y forma de pago</p>
+                <p class="instrucciones">El pago se realizará en un plazo máximo de 15 días.</p>
+                <div class="cuentabancaria">
+                <p>Banco Santander</p>
+                <p>IBAN: ES12 3456 7890</p>
+                <p>SWIFT/BIC: ABCDEFGM1X</p>
+            </div>
+            </div>
         </footer>
     </div>
 </body>

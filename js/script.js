@@ -6,6 +6,10 @@ window.onload = () => {
 let cuentaproductos = 0;
 let mapCarrito = new Map();
 let divCarrito = document.querySelector(".carrito_productos");
+let divFactura = document.createElement("div");
+divFactura.classList.add("total_carrito_container");
+let divTextoFactura = document.createElement("div");
+divTextoFactura.classList.add("texto_factura_container");
 
 
 //RECUPERAMOS DE FORMA ASINCRONA LOS DATOS DEL JSON
@@ -15,14 +19,15 @@ async function recuperaDatos() {
     pintaMoviles(datos);
 }
 
-
 //FUNCIÓN QUE PINTA LOS PRODUCTOS
 function pintaMoviles(datos) {
     let productos = document.querySelector(".productos");
+
     for (let movil of datos) {
         let divProducto = document.createElement("div");
         divProducto.classList = "producto";
         divProducto.id = movil.modelo.replace(/ /g, "_");
+        
         divProducto.innerHTML += `
                 <h2 class="marca">${movil.marca}</h2>
                 <div class="imagen_producto">
@@ -51,59 +56,57 @@ function pintaMoviles(datos) {
         }
 
         if (movil.promociones > 0) {
-            let img = document.createElement("img");
-            img.classList = "oferta";
-
-            if (movil.promociones == 10) {
-                img.src = "./images/10pc.png";
-            }
-            if (movil.promociones == 15) {
-                img.src = "./images/15pc.png";
-            }
-            if (movil.promociones == 20) {
-                img.src = "./images/20pc.png";
-            }
-
-            img.width = "100";
-            divProducto.children[1].appendChild(img);
-            let precioCon = document.createElement("p");
-            precioCon.classList.add("precio_final");
-
-            let precioSin = document.createElement("p");
-            precioSin.classList.add("precio_sinoferta");
-            precioSin.innerText = `${movil.precio}€`;
-            divprecio.appendChild(precioSin);
-
-            let precioOferta = parseInt(movil.precio) - parseFloat((movil.precio * 20) / 100)
-            precioCon.innerHTML = `${precioOferta}€`;
-            divprecio.appendChild(precioCon);
+           pintaProductoPromocion(movil, divProducto, divprecio);
         }
 
-        let boton = document.createElement("button");
-        boton.classList.add("botoncarrito");
-        boton.textContent = "Agregar al carrito";
-
-        divProducto.addEventListener("click", agregacarrito);
-
-        divProducto.appendChild(boton);
-        productos.appendChild(divProducto);
+       pintaBotonProducto(divProducto, productos);
     }
 }
+
+function pintaProductoPromocion(movil, divProducto, divprecio){
+
+    let img = document.createElement("img");
+    img.classList = "oferta";
+    if(movil.promociones == 10) img.src = "./images/10pc.png";
+    if(movil.promociones == 15) img.src = "./images/15pc.png";
+    if (movil.promociones == 20) img.src = "./images/20pc.png";
+    img.width = "100";
+    divProducto.children[1].appendChild(img);
+
+    let precioCon = document.createElement("p");
+    precioCon.classList.add("precio_final");
+
+    let precioSin = document.createElement("p");
+    precioSin.classList.add("precio_sinoferta");
+    precioSin.innerText = `${movil.precio}€`;
+
+    divprecio.appendChild(precioSin);
+
+    let precioOferta = parseInt(movil.precio) - parseFloat((movil.precio * 20) / 100)
+    precioCon.innerHTML = `${precioOferta}€`;
+
+    divprecio.appendChild(precioCon);
+}
+
+function pintaBotonProducto(divProducto, productos){
+    let boton = document.createElement("button");
+    boton.classList.add("botoncarrito");
+    boton.textContent = "Agregar al carrito";
+    divProducto.addEventListener("click", agregacarrito);
+    divProducto.appendChild(boton);
+    productos.appendChild(divProducto);
+}
+
+
 
 //DESPLEGAR CARRITO
 document.querySelector("#carrito").addEventListener("click", () => {
     let carrito = document.querySelector(".divcarrito");
-    if (carrito.children[1].children.length < 2) {
-        return;
-    } else {
-        carrito.classList.toggle("mostrar")
-    }
+    carrito.children[1].children.length < 2 ? null : carrito.classList.toggle("mostrar");
 });
 
 
-
 function agregacarrito(e) {
-
     if (e.target.tagName == "BUTTON") {
         let unidades = this.querySelector(".unidades_producto");
         if (unidades.textContent >= 1) {
@@ -182,16 +185,8 @@ function pintaCarrito(mapCarrito) {
         });
     }
 
-
-
     pintaFactura(mapCarrito);
 }
-
-let divFactura = document.createElement("div");
-divFactura.classList.add("total_carrito_container");
-
-let divTextoFactura = document.createElement("div");
-divTextoFactura.classList.add("texto_factura_container");
 
 function pintaFactura(mapCarrito) {
     divTextoFactura.innerHTML = "";
@@ -232,7 +227,6 @@ function pintaFactura(mapCarrito) {
     divCarrito.appendChild(divFactura);
 }
 
-
 function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
 
     let spanCarrito = document.querySelector("header .contador_productos span");
@@ -249,19 +243,12 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
 
         cuentaproductos = cuentaproductos - producto.cantidad;
         spanCarrito.innerHTML = cuentaproductos;
-
-        if (spanCarrito.textContent == 0) {
-            spanCarrito.parentNode.innerHTML = "";
-        }
-
+        spanCarrito.textContent == 0 ? spanCarrito.parentNode.innerHTML = "" : null;
         mapCarrito.delete(modelo);
         productoCarrito.remove();
-
-        if (mapCarrito.size == 0) {
-            carrito.classList.remove("mostrar");
-        }
-
+        mapCarrito.size == 0 ? carrito.classList.remove("mostrar") : null;
     }
+
 
     if (e.target.classList == 'menos') {
         stock.innerHTML = parseInt(stock.textContent) + 1;
@@ -313,7 +300,6 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
     pintaFactura(mapCarrito);
 }
 
-
 function productoAgotado(imagen, boton) {
     let imagenagotado = document.createElement("img");
     imagenagotado.classList.add("imagen_agotado");
@@ -324,22 +310,18 @@ function productoAgotado(imagen, boton) {
     boton.disabled = true;
 }
 
-
 document.querySelector(".carrito_pdf i").addEventListener("click", function () {
     generaPdf();
 });
 
 function generaPdf() {
-
     let usuario = {
         nombre:"Pedro Suarez López",
         direccion:"C/Progreso Nº5 4ºDcha",
         correo:"pedrosuarez@gmail.com",
         telefono:"655 323 232"
     }
-
     localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));
-    
     localStorage.setItem("usuario", JSON.stringify(usuario));
     window.open("factura.html");
 }

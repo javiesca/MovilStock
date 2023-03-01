@@ -1,15 +1,13 @@
-window.onload = function(){
+window.onload = () =>{
     recuperaDatos();
-
 }
 
 function recuperaDatos(){
     let mapCarrito = new Map(JSON.parse(localStorage.carrito));
     let usuario = JSON.parse(localStorage.usuario);
-
-    console.log(mapCarrito);
     pintaDatosUsuario(usuario);
     pintaDatosCarrito(mapCarrito);
+    pintaNumAndFecha();
 }
 
 function pintaDatosUsuario(usuario){
@@ -32,8 +30,6 @@ function pintaDatosUsuario(usuario){
         <span class=dato>${usuario.telefono}</span>
     </div>
     `;
-
-    pintaNumAndFecha();
 }
 
 
@@ -44,6 +40,7 @@ function pintaNumAndFecha(){
     let fecha = new Date();
     let cadenaFecha = `${fecha.getDate()} / ${fecha.getMonth()+1} / ${fecha.getFullYear()}`;
     console.log(cadenaFecha);
+
     //ASIGNAMOS UN NUMERO ALEATORIO A LA FACTURA
     let numeroAleatorio = Math.round(Math.random()*99999999);
     console.log(numeroAleatorio);
@@ -58,8 +55,7 @@ function pintaNumAndFecha(){
         <span class=titulo_dato>Factura Num.: </span>
         <span class=dato>MS-${numeroAleatorio}</span>
     </div>
-`
-    
+`;
 }
 
 
@@ -67,28 +63,19 @@ function pintaDatosCarrito(mapCarrito){
     let table = document.querySelector("table");
     let precioTotalPedido = 0;
 
-
     for(let [modelo, producto] of mapCarrito){
-
-        let precioTotal = parseInt(producto.preciounidad) * parseInt(producto.cantidad);
-
+    
         let leyendaUnidad = "";
-        if(producto.cantidad == 1){
-            leyendaUnidad = "ud."
-        }else{
-            leyendaUnidad = "uds."
-        }
+        leyendaUnidad = (producto.cantidad == 1) ? "ud." : "uds.";
 
         table.innerHTML += `
             <tr>
                 <td>${producto.modelo}</td>
                 <td>${producto.preciounidad}€</td>
                 <td>${producto.cantidad} ${leyendaUnidad}</td>
-                <td>${precioTotal}€</td>
+                <td>${producto.precio}€</td>
             </tr>
         `;
-
-
         precioTotalPedido = precioTotalPedido += producto.precio;
     }
 
@@ -96,10 +83,8 @@ function pintaDatosCarrito(mapCarrito){
 }
 
 function pintaTotalFactura(precioTotalPedido){
-
     let calculoIVA = parseFloat(precioTotalPedido *0.21).toFixed(2);
-    let precioSinIVA = parseFloat(precioTotalPedido) - calculoIVA;
-
+    let precioSinIVA = parseFloat(precioTotalPedido - calculoIVA).toFixed(2);
     let detalleIVA = document.querySelector(".total_pedido_container");
     detalleIVA.innerHTML = `
         <div class=linea>
@@ -116,4 +101,36 @@ function pintaTotalFactura(precioTotalPedido){
         </div>
     `;
 
+    //BOTON PARA GENERAR FACTURA EN PDF
+    document.querySelector(".contenido_genera").addEventListener("click", () =>{
+        generaPDF();
+        });
 }
+
+function generaPDF(){
+   let factura = document.querySelector(".factura");
+   html2pdf()
+   .set({
+        margin:0.5,
+        filename: "movilStockFactura.pdf",
+        image:{
+            type:"jpeg",
+            quality: 0.9
+        },
+        html2canvas:{
+            scale:3,
+            letterRendering: true,
+        },
+        jsPDF:{
+            unit : "in",
+            format: "a3",
+            orientation: "portrait",
+        }
+   })
+
+    .from(factura)
+    .save();
+}
+
+
+
