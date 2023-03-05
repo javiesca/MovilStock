@@ -36,11 +36,11 @@ body{
 }
 
 .factura{
-    margin:20px;
+    margin:20px auto;
     display: flex;
     flex-direction: column;
     position: relative;
-    min-width: 90%;
+    width: 900px;
     min-height: 1200px;
     overflow: hidden;
     background-color: rgb(246, 244, 244);
@@ -57,8 +57,9 @@ body{
     background-color:var(--color-rojo);
     font-size: 30px;
     color: white;
+
     /*WEBKIT PARA PODER IMPRIMR EL ELEMENTO EN LA POSICION CORRECTA EN EL PDF*/
-    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
     right:-275px;
     top:-175px;
 }

@@ -10,7 +10,7 @@ header{
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     height: 100px;
     width: 100%;
     background-color: rgb(226, 225, 225);
@@ -315,12 +315,18 @@ button{
     }
 
     header h1{
-        font-size: 45px;
+        font-size: 65px;
     }
+
+
  
 }
 
 @media(max-width:750px){
+
+    header h1{
+        font-size: 35px;
+    }
     header{
         padding:40px;
     }
@@ -341,11 +347,19 @@ button{
 
     .divcarrito{
         width: 375px;
-        left: calc(100% - 375px);
+        left: calc(100% - 370px);
     }
 
     .divcarrito img{
         width: 150px;
+    }
+
+    .imagen_producto img{
+        width: 200px;
+    }
+
+    .imagen_producto .oferta{
+        width: 100px;
     }
 }
     

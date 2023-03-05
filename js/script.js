@@ -106,6 +106,7 @@ document.querySelector("#carrito").addEventListener("click", () => {
 });
 
 
+//FUNCITON AGREGAR CARRITO
 function agregacarrito(e) {
     if (e.target.tagName == "BUTTON") {
         let unidades = this.querySelector(".unidades_producto");
@@ -134,21 +135,25 @@ function agregacarrito(e) {
                 producto.cantidad++;
             }
 
-            //SPAN PRODUCTOS DEL CARRITO
+            //SPAN NUMERO PRODUCTOS DEL CARRITO
             document.querySelector(".contador_productos").innerHTML = `<span>${cuentaproductos}</span>`
 
-            //FUNCION QUE PINTA PRODUCTOS EN EL CARRITO
-            pintaCarrito(mapCarrito);
+           
         }
 
         if (unidades.textContent == 0) {
             unidades.textContent = 0;
             productoAgotado(this.querySelector(".imagen_producto"), this.querySelector(".botoncarrito"))
         }
+
     }
+    
+    //FUNCION QUE PINTA PRODUCTOS EN EL CARRITO
+    pintaCarrito(mapCarrito);
 
 }
 
+//FUNCITON PINTA CARRITO
 function pintaCarrito(mapCarrito) {
     divCarrito.innerHTML = "";
 
@@ -188,6 +193,8 @@ function pintaCarrito(mapCarrito) {
     pintaFactura(mapCarrito);
 }
 
+
+//FUNCION PINTA TOTAL FACTURA CARRITO
 function pintaFactura(mapCarrito) {
     divTextoFactura.innerHTML = "";
 
@@ -227,6 +234,8 @@ function pintaFactura(mapCarrito) {
     divCarrito.appendChild(divFactura);
 }
 
+
+//FUNCTIN
 function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
 
     let spanCarrito = document.querySelector("header .contador_productos span");
@@ -234,13 +243,15 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
     let precioSumamoviles = contenido.querySelector(".carrito_preciosuma");
     let producto = mapCarrito.get(modelo);
     let carrito = document.querySelector(".divcarrito");
+
     let productoCarrito = document.querySelector(`[data-modelo="${producto.modelo.replace(/ /g, '_')}"]`);
+
     let divproducto = document.querySelector(`#${producto.modelo.replace(/ /g, '_')}`);
     const stock = divproducto.querySelector('.unidades_producto');
 
+    //BOTON BORRAR
     if (e.target.tagName == "I") {
         stock.innerHTML = parseInt(stock.textContent) + parseInt(producto.cantidad);
-
         cuentaproductos = cuentaproductos - producto.cantidad;
         spanCarrito.innerHTML = cuentaproductos;
         spanCarrito.textContent == 0 ? spanCarrito.parentNode.innerHTML = "" : null;
@@ -249,7 +260,7 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
         mapCarrito.size == 0 ? carrito.classList.remove("mostrar") : null;
     }
 
-
+    //BOTON CANTIDAD MENOS
     if (e.target.classList == 'menos') {
         stock.innerHTML = parseInt(stock.textContent) + 1;
         producto.cantidad--;
@@ -271,9 +282,8 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
 
     }
 
-    //MIRAR CONTADOR PARA QUE NO DEJE COMPRAR MAS MOVILES DE LOS QUE HAY EN STOCK
+    //BOTON CANTIDAD MAS
     if (e.target.classList == 'mas') {
-
         if (parseInt(stock.innerHTML) > 0) {
             producto.precio = producto.precio + producto.preciounidad;
             stock.innerHTML = parseInt(stock.textContent) - 1;
@@ -289,7 +299,7 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
         }
     }
 
-
+    //Si el producto está agotado, y damos al boton de "-" en el carrito, volvería a haber stock del producto, por lo que eliminarmos la imagen de producto agotado y volvemos a activar el boton de añadir al carrito.
     if (stock.innerHTML >= 1 && divproducto.querySelector("button").disabled == true) {
         divproducto.querySelector('button').disabled = false;
         divproducto.querySelector(".imagen_agotado").remove();
@@ -300,6 +310,7 @@ function procesaUnidadesCarrito(e, modelo, contenido, mapCarrito) {
     pintaFactura(mapCarrito);
 }
 
+//CUANDO SE AGOTA UN PRODUCTO PINTA UNA IMAGEN ENCIMA INDICANDOLO
 function productoAgotado(imagen, boton) {
     let imagenagotado = document.createElement("img");
     imagenagotado.classList.add("imagen_agotado");
@@ -310,19 +321,27 @@ function productoAgotado(imagen, boton) {
     boton.disabled = true;
 }
 
+//BOTON QUE LLAMA A LA FUNCION DE GENERAR HTML DE LA FACUTRA
 document.querySelector(".carrito_pdf i").addEventListener("click", function () {
     generaPdf();
 });
 
+//FUNCION QUE GENERA LA FACTURA EN HTML. 
 function generaPdf() {
+
+    //Enviamos un objeto usuario con todos los datos.
     let usuario = {
         nombre:"Pedro Suarez López",
         direccion:"C/Progreso Nº5 4ºDcha",
         correo:"pedrosuarez@gmail.com",
         telefono:"655 323 232"
     }
+
+    //Enviamos el Mapa con los productos del carrito y el usuario.
     localStorage.setItem("carrito", JSON.stringify(Array.from(mapCarrito.entries())));
     localStorage.setItem("usuario", JSON.stringify(usuario));
+
+    //Abrimos una pagina nueva donde generamos la factura.
     window.open("factura.html");
 }
 
